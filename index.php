@@ -8,13 +8,12 @@ $pageDetails = main_function();
 <head><link rel="stylesheet" href="style.css" type="text/css"></head>
 <body>
 
-
 <?php  foreach($pageDetails as $page) { ?>
     <div class='aa-bold-text'>Page <?php echo $page['pageNum'];?>  Details </div>
     <div class='aa-div-row'>Number of a unique images:  <span><?php echo $page['imagesCount'];?></span> </div>
     <div class='aa-div-row'>Number of unique internal links: <span><?php echo $page['internalLinks'];?></span> </div>
     <div class='aa-div-row'>Number of unique external links:  <span><?php echo $page['externalLinks'];?></span> </div>
-    <div class='aa-div-row'>Avg page load:  <span><?php echo $page['imagesCount'];?></span> </div>
+    <div class='aa-div-row'>Avg page load:  <span><?php echo $page['avgPageLoad'];?></span> </div>
     <div class='aa-div-row'>Avg word count:  <span><?php echo $page['avgWordCount'];?></span> </div>
     <div class='aa-div-row'>Page Title:  <span><?php echo $page['pageTitle'];?></span> </div>
     <div class='aa-div-row'>Avg Title length:  <span><?php echo $page['pageTitleLength'];?></span> </div>
@@ -40,10 +39,7 @@ $pageDetails = main_function();
             <td><?php echo $response_code; ?></td>
         </tr>
     <?php } ?>
-
     </tbody>
 </table>
-
-
 </body>
 </html>

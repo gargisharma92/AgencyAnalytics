@@ -11,9 +11,6 @@ function path_to_absolute($relative_path, $base) {
     /* return if there is already absolute URL */
     if (parse_url($relative_path, PHP_URL_SCHEME) != '') return $relative_path;
 
-    /* queries and anchors */
-    if ($relative_path[0]=='#' || $relative_path[0]=='?') return $base.$relative_path;
-
     /* parsing the base URL and convert to local variables: $scheme, $host, $path */
     extract(parse_url($base));
 
@@ -86,7 +83,7 @@ function main_function() {
     $pages = [
         0 => "https://agencyanalytics.com/feature/automated-marketing-reports",
         1 => "https://agencyanalytics.com/feature/instagram-dashboard-2",
-        2 => "https://agencyanalytics.com/feature/ecommerce-reporting-software",
+        2 => "https://agencyanalytics.com/",
     ];
 
     $crawledPagesCount =  count($pages);
@@ -95,15 +92,22 @@ function main_function() {
     $pageNum = 0;
     foreach ($pages as $key => $page ) {
 
+        // Set time before loading page
+        $starttime = microtime(true);
+
         // Get content of page
         $html = file_get_contents($page);
+
         $doc=new DOMDocument();
 
         // Load html
         @$doc->loadHTML($html);
 
+        // Set time after loading page
+        $endtime = microtime(true);
+
         // Get all the links on website
-        $xml=simplexml_import_dom($doc); // just to make xpath more simple
+        $xml=simplexml_import_dom($doc);
         $strings=$xml->xpath('//a');
 
         // Looping through all the internal and external links
@@ -119,7 +123,8 @@ function main_function() {
 
             if($link1 == $link2){
                 $internalLinks++;
-            }else{
+            }
+            else {
                 $externalLinks++;
             }
             $totalLinks++;
@@ -141,7 +146,7 @@ function main_function() {
             'imagesCount' => $imagesCount,
             'internalLinks' => $internalLinks,
             'externalLinks' => $externalLinks,
-            'avgPageLoad' => $externalLinks,
+            'avgPageLoad' => $endtime - $starttime,
             'avgWordCount' => $avgWordCount,
             'pageTitle' => $pageTitle['title'],
             'pageTitleLength' => $pageTitle['length'],
