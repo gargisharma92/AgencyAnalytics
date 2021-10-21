@@ -1,0 +1,36 @@
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.aa-bold-text {
+    color: blue;
+    font-size: large;
+    font-weight: bold;
+    text-decoration: underline
+}
+
+h3 { display: inline-block; }
+
+.aa-div-row > span {
+    background: grey;
+    padding: 2px 20px;
+}
+.aa-div-row {
+    padding: 10px 0px;
+}
+
+.tableHeading {
+    text-align: center;
+    background-color: coral;
+}
+
+
