@@ -78,7 +78,6 @@ function get_image_count($doc) {
 function main_function() {
     $internalLinks = $externalLinks = $totalLinks = 0;
 
-
     // Created array of pages we want to crawl/scrap (In this case, we are crawling 3 pages)
     $pages = [
         0 => "https://agencyanalytics.com/feature/automated-marketing-reports",
@@ -130,7 +129,6 @@ function main_function() {
             $totalLinks++;
         }
 
-
         // Return images count on web page
         $imagesCount = get_image_count($doc);
 
@@ -154,8 +152,3 @@ function main_function() {
     }
     return $array;
 }
-
-
-
-
-
