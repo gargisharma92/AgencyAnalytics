@@ -6,32 +6,31 @@
  * @param $base
  * @return string
  */
-function path_to_absolute($relative_path, $base)
-{
+function path_to_absolute($relative_path, $base) {
     $path = "";
     /* return if there is already absolute URL */
-if (parse_url($relative_path, PHP_URL_SCHEME) != '') return $relative_path;
+    if (parse_url($relative_path, PHP_URL_SCHEME) != '') return $relative_path;
 
-/* queries and anchors */
-if ($relative_path[0]=='#' || $relative_path[0]=='?') return $base.$relative_path;
+    /* queries and anchors */
+    if ($relative_path[0]=='#' || $relative_path[0]=='?') return $base.$relative_path;
 
-/* parsing the base URL and convert to local variables: $scheme, $host, $path */
-extract(parse_url($base));
+    /* parsing the base URL and convert to local variables: $scheme, $host, $path */
+    extract(parse_url($base));
 
-/* removing non-directory element from path */
-$path = preg_replace('#/[^/]*$#', '', $path);
+    /* removing non-directory element from path */
+    $path = preg_replace('#/[^/]*$#', '', $path);
 
-/* destroy path if relative url points to root */
-if ($relative_path[0] == '/') $path = '';
+    /* destroy path if relative url points to root */
+    if ($relative_path[0] == '/') $path = '';
 
-/* dirty absolute URL */
-$abs = "$host$path/$relative_path";
+    /* dirty absolute URL */
+    $abs = "$host$path/$relative_path";
 
-$replace = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
-for($n = 1; $n > 0; $abs = preg_replace($replace, '/', $abs, -1, $n)) {}
+    $replace = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
+    for($n = 1; $n > 0; $abs = preg_replace($replace, '/', $abs, -1, $n)) {}
 
-/* Final absolute URL */
-return $scheme.'://'.$abs;
+    /* Final absolute URL */
+    return $scheme.'://'.$abs;
 }
 
 /**
